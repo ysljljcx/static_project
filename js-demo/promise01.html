@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        new Promise((resolvef, rejectf) => {
+            setTimeout(() => {
+                //resolve({ name: 'zhanghao', age: 20 })
+                rejectf({ name: 'zhanghao', age: 21 })
+            }, 2000)
+        }).then(
+            (ress) => { console.log(ress) },
+            (err) => { console.log(err) }
+        )
+
+        new Promise(resolve => {
+            setTimeout(() => {
+                resolve('hello2')
+            }, 2000)
+        }).then(val => {
+            console.log(val) //  参数val = 'hello'
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve('world2')
+                }, 2000)
+            })
+        }).then(val => {
+            console.log(val) // 参数val = 'world'
+        })
+
+        //切菜
+        function cutUp() {
+            console.log('开始切菜。');
+            var p = new Promise(function (resolve, reject) {        //做一些异步操作
+                setTimeout(function () {
+                    console.log('切菜完毕！');
+                    console.log('切菜完毕！');
+                    resolve('切好的菜');
+                }, 1000);
+            });
+            return p;
+        }
+
+        //烧水
+        function boil() {
+            console.log('开始烧水。');
+            var p = new Promise(function (resolve, reject) {        //做一些异步操作
+                setTimeout(function () {
+                    console.log('烧水完毕！');
+                    reject('烧好的水');
+                }, 1000);
+            });
+            return p;
+        }
+
+        Promise.all([cutUp(), boil()])
+            .then((result) => {
+                console.log('准备工作完毕');
+                console.log(result);
+            })
+
+    </script>
+</body>
+
+</html>
