@@ -54,6 +54,7 @@ request.interceptors.request.use(config => {
 
 // response interceptor
 request.interceptors.response.use((response) => {
+  console.log('处理返回结构', response)
   return response.data
 }, errorHandler)
 
