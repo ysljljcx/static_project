@@ -279,7 +279,7 @@ export default {
     }
   },
   mounted () {
-    console.log('fff', this)
+    console.log('登陆页面对象信息', this)
   }
 }
 </script>
